@@ -8,3 +8,8 @@ body {
   /* This centers our sketch vertically. */
   align-items: center;
 }
+
+.nav-element {
+  width: 10%;
+  margin: 2% 2% 0% 0%;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Sketch from "react-p5";
+
 const PathAlgorithms = require("./Path/Path");
 const MazeAlgorithms = require("./Maze/Maze");
 
@@ -18,13 +19,14 @@ export default class Graph extends Component {
     this.objectDraw = {
       start: this.placeStartOnClick,
       end: this.placeEndOnClick,
-      wall: this.placeMazeWallOnClick
+      wall: this.placeMazeWallOnClick,
+      none: this.empty
     };
   }
 
   setup = (p5, canvasParentRef) => {
-    this.width = p5.windowWidth * 0.9; //pixels
-    this.height = p5.windowHeight * 0.9; //pixels
+    this.width = p5.windowWidth * 1; //pixels
+    this.height = p5.windowHeight * 0.89; //pixels
     this.mazeHeight = 61; //units
     this.mazeWidth = 121; //units
     this.mazeHeightUnit = this.height / this.mazeHeight; // pixels/unit
@@ -107,14 +109,6 @@ export default class Graph extends Component {
           this.colourBox(p5, index, [0, 0, 255]);
           this.startPlaced = true;
           this.startCoords = index;
-
-          if (this.endPlaced) {
-            this.traversalInfo = PathAlgorithms[this.props.pathAlgorithm](
-              this.graph,
-              this.startCoords,
-              this.endCoords
-            );
-          }
         } else {
           // TODO: can make like a popup which says start has already been placed
         }
@@ -144,16 +138,6 @@ export default class Graph extends Component {
           this.colourBox(p5, index, [0, 255, 255]);
           this.endPlaced = true;
           this.endCoords = index;
-
-          // testing
-          if (this.startPlaced) {
-            this.traversalInfo = PathAlgorithms[this.props.pathAlgorithm](
-              this.graph,
-              this.startCoords,
-              this.endCoords
-            );
-          }
-          //
         } else {
           // TODO: can make like a popup which says start has already been placed
         }
@@ -195,13 +179,6 @@ export default class Graph extends Component {
         this.colourBox(p5, index, 255);
       }
     }
-    if (this.startPlaced && this.endPlaced) {
-      this.traversalInfo = PathAlgorithms[this.props.pathAlgorithm](
-        this.graph,
-        this.startCoords,
-        this.endCoords
-      );
-    }
 
     this.place = this.empty;
   };
@@ -233,7 +210,7 @@ export default class Graph extends Component {
   clearAnimation = p5 => {
     for (let i = 0; i < this.graph.length; i++) {
       for (let j = 0; j < this.graph[0].length; j++) {
-        if (this.graph[i][j] == 0) {
+        if (this.graph[i][j] === 0) {
           this.colourBox(p5, [i, j], 255);
         }
       }
@@ -266,10 +243,17 @@ export default class Graph extends Component {
       }
 
       if (this.startPlaced && this.endPlaced) {
-        this.animatePath(p5, this.traversalInfo.traversalOrder);
-        this.animatePath(p5, this.traversalInfo.shortestPath);
-        this.props.getDistance(this.traversalInfo.distance);
-        this.animated = true;
+        this.traversalInfo = PathAlgorithms[this.props.pathAlgorithm](
+          this.graph,
+          this.startCoords,
+          this.endCoords
+        );
+        if (this.traversalInfo) {
+          this.animatePath(p5, this.traversalInfo.traversalOrder);
+          this.animatePath(p5, this.traversalInfo.shortestPath);
+          this.props.getDistance(this.traversalInfo.distance);
+          this.animated = true;
+        }
       } else {
         // TODO: something which says start and end haven't been placed
       }
@@ -279,17 +263,22 @@ export default class Graph extends Component {
       console.log("making maze");
       let mazeOrder = MazeAlgorithms[this.props.mazeAlgorithm](this.graph);
       console.log("mazeorder", mazeOrder);
-      this.animateMazeWalls(p5, mazeOrder);
+      if (mazeOrder) {
+        this.animateMazeWalls(p5, mazeOrder);
+      }
     }
   };
 
   render = () => {
     return (
-      <Sketch
-        setup={this.setup}
-        draw={this.draw}
-        touchStarted={this.touchStarted}
-      />
+      <div>
+        <Sketch
+          setup={this.setup}
+          draw={this.draw}
+          touchStarted={this.touchStarted}
+          className="sketch"
+        />
+      </div>
     );
   };
 }

@@ -10,7 +10,7 @@ function RandomizedVerticals(grid) {
   var result = [];
   for (let i = 0; i < holes.length; i++) {
     for (let j = 1; j < rows - 1; j++) {
-      if (j != holes[i]) {
+      if (j !== holes[i]) {
         result.push([j, 2 * i + 2]);
       }
     }

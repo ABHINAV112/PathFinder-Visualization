@@ -1,5 +1,6 @@
 const BreadthFirstSearch = require("./BreadthFirstSearch");
 
 module.exports = {
-  BreadthFirstSearch: BreadthFirstSearch
+  BreadthFirstSearch: BreadthFirstSearch,
+  none: function() {}
 };

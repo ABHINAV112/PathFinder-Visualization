@@ -8,9 +8,9 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      object: "start",
-      mazeAlgorithm: "RandomizedVerticals",
-      pathAlgorithm: "BreadthFirstSearch",
+      object: "none",
+      mazeAlgorithm: "none",
+      pathAlgorithm: "none",
       distance: 0
     };
     this.getObject = this.getObject.bind(this);
@@ -80,7 +80,7 @@ export default class App extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className="main">
         <Navbar
           getObject={this.getObject}
           getMazeAlgorithm={this.getMazeAlgorithm}

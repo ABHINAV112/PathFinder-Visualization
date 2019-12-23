@@ -1,6 +1,7 @@
 body {
   margin: 0;
   display: flex;
+  height: 100%;
 
   /* This centers our sketch horizontally. */
   justify-content: center;
@@ -10,6 +11,20 @@ body {
 }
 
 .nav-element {
-  width: 10%;
-  margin: 2% 2% 0% 0%;
+  width: 100%;
+}
+
+.navbar-custom {
+  height: 100%;
+}
+
+.main {
+  height: 100%;
+}
+
+.alert {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

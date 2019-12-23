@@ -11,7 +11,7 @@ function RandomizedHorizontals(grid) {
   var result = [];
   for (let i = 0; i < holes.length; i++) {
     for (let j = 1; j < cols - 1; j++) {
-      if (j != holes[i]) {
+      if (j !== holes[i]) {
         result.push([2 * i + 2, j]);
       }
     }

@@ -161,7 +161,7 @@ export default class Graph extends Component {
       this.colourBox(p5, index, [47, 56, 56]);
     } else if (this.graph[index[0]][index[1]] === 2) {
       this.graph[index[0]][index[1]] = 0;
-      this.colourBox(p5, index, 0);
+      this.colourBox(p5, index, 255);
     }
   };
 
@@ -179,7 +179,7 @@ export default class Graph extends Component {
         this.colourBox(p5, index, [47, 56, 56]);
       } else if (this.graph[index[0]][index[1]] === 2) {
         this.graph[index[0]][index[1]] = 0;
-        this.colourBox(p5, index, 0);
+        this.colourBox(p5, index, 255);
       }
     }
 

@@ -40,6 +40,8 @@ export default class Graph extends Component {
     this.endPlaced = false;
     this.endCoords = [];
     this.animated = false;
+    this.iPrev = 0;
+    this.jPrev = 0;
     // p5.frameRate(1);
   };
 
@@ -55,7 +57,7 @@ export default class Graph extends Component {
           j === this.mazeWidth - 1
         ) {
           row.push(3);
-          p5.fill(41, 179, 163);
+          p5.fill(47, 56, 56);
         } else {
           p5.fill(255);
           row.push(0);
@@ -106,7 +108,7 @@ export default class Graph extends Component {
       if (this.graph[index[0]][index[1]] === 0) {
         if (!this.startPlaced) {
           this.graph[index[0]][index[1]] = 1;
-          this.colourBox(p5, index, [0, 0, 255]);
+          this.colourBox(p5, index, [0, 203, 255]);
           this.startPlaced = true;
           this.startCoords = index;
         } else {
@@ -135,7 +137,7 @@ export default class Graph extends Component {
       if (this.graph[index[0]][index[1]] === 0) {
         if (!this.endPlaced) {
           this.graph[index[0]][index[1]] = 4;
-          this.colourBox(p5, index, [0, 255, 255]);
+          this.colourBox(p5, index, [255, 25, 33]);
           this.endPlaced = true;
           this.endCoords = index;
         } else {
@@ -156,15 +158,16 @@ export default class Graph extends Component {
   placeMazeWall = (p5, index) => {
     if (this.graph[index[0]][index[1]] === 0) {
       this.graph[index[0]][index[1]] = 2;
-      this.colourBox(p5, index, 0);
+      this.colourBox(p5, index, [47, 56, 56]);
     } else if (this.graph[index[0]][index[1]] === 2) {
       this.graph[index[0]][index[1]] = 0;
-      this.colourBox(p5, index, 255);
+      this.colourBox(p5, index, 0);
     }
   };
 
   placeMazeWallOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
+    console.log("i,j prev", this.iPrev, this.jPrev);
     if (
       index[0] < this.mazeHeight &&
       index[0] >= 0 &&
@@ -173,22 +176,25 @@ export default class Graph extends Component {
     ) {
       if (this.graph[index[0]][index[1]] === 0) {
         this.graph[index[0]][index[1]] = 2;
-        this.colourBox(p5, index, 0);
+        this.colourBox(p5, index, [47, 56, 56]);
       } else if (this.graph[index[0]][index[1]] === 2) {
         this.graph[index[0]][index[1]] = 0;
-        this.colourBox(p5, index, 255);
+        this.colourBox(p5, index, 0);
       }
     }
 
     this.place = this.empty;
   };
 
-  animatePath = (p5, order) => {
-    var colour = [
-      Math.floor(Math.random() * 255 + 0),
-      Math.floor(Math.random() * 255 + 0),
-      Math.floor(Math.random() * 255 + 0)
-    ];
+  animatePath = (p5, order, colour) => {
+    if (!colour) {
+      colour = [
+        Math.floor(Math.random() * 255 + 0),
+        Math.floor(Math.random() * 255 + 0),
+        Math.floor(Math.random() * 255 + 0)
+      ];
+    }
+
     p5.frameRate(1);
     for (let i = 1; i < order.length - 1; i++) {
       setTimeout(() => {
@@ -249,8 +255,12 @@ export default class Graph extends Component {
           this.endCoords
         );
         if (this.traversalInfo) {
-          this.animatePath(p5, this.traversalInfo.traversalOrder);
-          this.animatePath(p5, this.traversalInfo.shortestPath);
+          this.animatePath(p5, this.traversalInfo.traversalOrder, [
+            49,
+            233,
+            129
+          ]);
+          this.animatePath(p5, this.traversalInfo.shortestPath, [255, 213, 60]);
           this.props.getDistance(this.traversalInfo.distance);
           this.animated = true;
         }

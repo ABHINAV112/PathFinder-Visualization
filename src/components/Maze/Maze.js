@@ -1,6 +1,6 @@
-const RandomizedVerticals = require("./RandomizedVerticals");
-const RandomizedHorizontals = require("./RandomizedHorizontals");
-module.exports = {
+import RandomizedVerticals from "./RandomizedVerticals";
+import RandomizedHorizontals from "./RandomizedHorizontals";
+export default {
   RandomizedVerticals: RandomizedVerticals,
   RandomizedHorizontals: RandomizedHorizontals,
   none: function() {}

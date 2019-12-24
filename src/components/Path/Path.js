@@ -1,7 +1,7 @@
-const BreadthFirstSearch = require("./BreadthFirstSearch");
-const DepthFirstSearch = require("./DepthFirstSearch");
+import BreadthFirstSearch from "./BreadthFirstSearch";
+import DepthFirstSearch from "./DepthFirstSearch";
 
-module.exports = {
+export default {
   BreadthFirstSearch: BreadthFirstSearch,
   DepthFirstSearch: DepthFirstSearch,
   none: function() {}

@@ -1,5 +1,5 @@
-const GraphHelper = require("../DataStructures/GraphHelper");
-const Stack = require("../DataStructures/Stack");
+import GraphHelper from "../DataStructures/GraphHelper";
+import Stack from "../DataStructures/Stack";
 
 // function will return the order in which nodes are traversed during BFS
 function DepthFirstSearch(maze, start, end) {
@@ -63,4 +63,4 @@ function DepthFirstSearch(maze, start, end) {
   };
 }
 
-module.exports = DepthFirstSearch;
+export default DepthFirstSearch;

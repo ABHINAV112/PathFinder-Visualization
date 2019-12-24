@@ -1,5 +1,5 @@
-const GraphHelper = require("../DataStructures/GraphHelper");
-const Queue = require("../DataStructures/Queue");
+import GraphHelper from "../DataStructures/GraphHelper";
+import Queue from "../DataStructures/Queue";
 
 // function will return the order in which nodes are traversed during BFS
 function BreadthFirstSearch(maze, start, end) {
@@ -63,4 +63,4 @@ function BreadthFirstSearch(maze, start, end) {
   };
 }
 
-module.exports = BreadthFirstSearch;
+export default BreadthFirstSearch;

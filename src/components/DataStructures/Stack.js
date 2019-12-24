@@ -15,4 +15,4 @@ class Stack {
     return this.array.length === 0;
   }
 }
-module.exports = Stack;
+export default Stack;

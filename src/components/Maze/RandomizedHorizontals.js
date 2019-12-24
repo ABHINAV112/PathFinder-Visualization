@@ -18,4 +18,4 @@ function RandomizedHorizontals(grid) {
   }
   return result;
 }
-module.exports = RandomizedHorizontals;
+export default RandomizedHorizontals;

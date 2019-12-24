@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Sketch from "react-p5";
 
-const PathAlgorithms = require("./Path/Path");
-const MazeAlgorithms = require("./Maze/Maze");
+import PathAlgorithms from "./Path/Path";
+import MazeAlgorithms from "./Maze/Maze";
 
 // TODO: change maze wall to maze wall on click and make a maze wall wrapper for i,j
 // make a clear traversal which doesn't clear walls,start and end basically clears when free

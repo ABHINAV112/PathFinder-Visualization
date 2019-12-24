@@ -17,4 +17,4 @@ function RandomizedVerticals(grid) {
   }
   return result;
 }
-module.exports = RandomizedVerticals;
+export default RandomizedVerticals;

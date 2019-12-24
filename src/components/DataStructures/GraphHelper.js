@@ -43,4 +43,4 @@ class GraphHelper {
   };
 }
 
-module.exports = GraphHelper;
+export default GraphHelper;

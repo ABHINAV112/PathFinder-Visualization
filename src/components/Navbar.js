@@ -31,7 +31,7 @@ export default class CustomNavbar extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="nav-element">
-                {["Start", "Wall", "End"].map(object => {
+                {["Start", "Wall", "Weight", "End"].map(object => {
                   return (
                     <Dropdown.Item
                       onClick={() => {
@@ -40,6 +40,7 @@ export default class CustomNavbar extends Component {
                           selectedObject: object
                         });
                       }}
+                      key={object}
                     >
                       {object}
                     </Dropdown.Item>
@@ -67,6 +68,7 @@ export default class CustomNavbar extends Component {
                   mazeAlgorithm => {
                     return (
                       <Dropdown.Item
+                        key={mazeAlgorithm}
                         onClick={() => {
                           this.props.getMazeAlgorithm(
                             mazeAlgorithm.replace(/ /g, "")
@@ -100,10 +102,11 @@ export default class CustomNavbar extends Component {
               />
 
               <Dropdown.Menu>
-                {["Breadth First Search", "Depth First Search"].map(
+                {["Breadth First Search", "Depth First Search", "Dijkstra"].map(
                   pathAlgorithm => {
                     return (
                       <Dropdown.Item
+                        key={pathAlgorithm}
                         onClick={() => {
                           this.props.getShortPathAlgorithm(
                             pathAlgorithm.replace(/ /g, "")
@@ -133,7 +136,17 @@ export default class CustomNavbar extends Component {
               Clear
             </Button>
           </Col>
-          <Col></Col>
+          <Col>
+            <Button
+              variant="light"
+              onClick={() => {
+                this.props.clearAnimation();
+              }}
+              className="nav-element"
+            >
+              ClearAnimation
+            </Button>
+          </Col>
           <Col>
             <Button variant="light" className="nav-element">
               Distance <Badge variant="dark">{this.props.distance}</Badge>

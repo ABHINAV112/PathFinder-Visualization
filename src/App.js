@@ -23,6 +23,7 @@ export default class App extends React.Component {
     this.returnFindPath = this.returnFindPath.bind(this);
     this.generateMaze = this.generateMaze.bind(this);
     this.returnGenerateMaze = this.returnGenerateMaze.bind(this);
+    this.clearAnimation = this.clearAnimation.bind(this);
   }
 
   getObject = object => {
@@ -38,12 +39,24 @@ export default class App extends React.Component {
   clearSketch = () => {
     this.setState({ clear: true });
   };
+  clearAnimation = () => {
+    this.setState({ clearAnimation: true });
+  };
   findPath = () => {
     this.setState({ findPath: true });
   };
   generateMaze = () => {
     console.log("hi");
     this.setState({ generateMaze: true });
+  };
+  returnClearAnimation = () => {
+    if (this.state.clearAnimation) {
+      this.setState({
+        clearAnimation: false
+      });
+      return true;
+    }
+    return false;
   };
   returnClear = () => {
     if (this.state.clear) {
@@ -89,6 +102,7 @@ export default class App extends React.Component {
           findPath={this.findPath}
           distance={this.state.distance}
           generateMaze={this.generateMaze}
+          clearAnimation={this.clearAnimation}
         />
         <Graph
           className="center"
@@ -99,6 +113,7 @@ export default class App extends React.Component {
           returnFindPath={this.returnFindPath}
           getDistance={this.getDistance}
           returnGenerateMaze={this.returnGenerateMaze}
+          returnClearAnimation={this.returnClearAnimation}
         />
       </div>
     );

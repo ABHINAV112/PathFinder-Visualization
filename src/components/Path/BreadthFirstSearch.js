@@ -33,12 +33,12 @@ function BreadthFirstSearch(maze, start, end) {
     var currDistance = distances[currNode[0]][currNode[1]];
     if (currNode[0] !== end[0] || currNode[1] !== end[1]) {
       var currNeighbours = graphHelper.returnNeighbours(currNode);
-      for (let i = 0; i < currNeighbours.length; i++) {
-        if (distances[currNeighbours[i][0]][currNeighbours[i][1]] === -1) {
-          queue.enqueue(currNeighbours[i]);
-          distances[currNeighbours[i][0]][currNeighbours[i][1]] =
-            currDistance + 1;
-          parentTracking[currNeighbours[i][0]][currNeighbours[i][1]] = currNode;
+      for (let i = currNeighbours.length - 1; i >= 0; i--) {
+        let currNeighbour = currNeighbours[i].neighbour;
+        if (distances[currNeighbour[0]][currNeighbour[1]] === -1) {
+          queue.enqueue(currNeighbour);
+          distances[currNeighbour[0]][currNeighbour[1]] = currDistance + 1;
+          parentTracking[currNeighbour[0]][currNeighbour[1]] = currNode;
         }
       }
       order.push(currNode);

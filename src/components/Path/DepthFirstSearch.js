@@ -1,7 +1,7 @@
 import GraphHelper from "../DataStructures/GraphHelper";
 import Stack from "../DataStructures/Stack";
 
-// function will return the order in which nodes are traversed during BFS
+// function will return the order in which nodes are traversed during DFS
 function DepthFirstSearch(maze, start, end) {
   var stack = new Stack();
   var rows = maze.length;
@@ -22,7 +22,7 @@ function DepthFirstSearch(maze, start, end) {
     distances.push(row);
   }
 
-  // BFS
+  // DFS
   var order = [];
   var finalDistance = -1;
   distances[start[0]][start[1]] = 0;
@@ -33,14 +33,15 @@ function DepthFirstSearch(maze, start, end) {
     var currDistance = distances[currNode[0]][currNode[1]];
     if (currNode[0] !== end[0] || currNode[1] !== end[1]) {
       var currNeighbours = graphHelper.returnNeighbours(currNode);
-      for (let i = 0; i < currNeighbours.length; i++) {
-        if (distances[currNeighbours[i][0]][currNeighbours[i][1]] === -1) {
-          stack.push(currNeighbours[i]);
-          distances[currNeighbours[i][0]][currNeighbours[i][1]] =
-            currDistance + 1;
-          parentTracking[currNeighbours[i][0]][currNeighbours[i][1]] = currNode;
+      for (let i = currNeighbours.length - 1; i >= 0; i--) {
+        let currNeighbour = currNeighbours[i].neighbour;
+        if (distances[currNeighbour[0]][currNeighbour[1]] === -1) {
+          stack.push(currNeighbour);
+          distances[currNeighbour[0]][currNeighbour[1]] = currDistance + 1;
+          parentTracking[currNeighbour[0]][currNeighbour[1]] = currNode;
         }
       }
+
       order.push(currNode);
     } else {
       finalDistance = currDistance;

@@ -299,13 +299,13 @@ export default class Graph extends Component {
             p5,
             this.traversalInfo.traversalOrder,
             [49, 233, 129],
-            [0, 0, 238]
+            [30, 200, 100]
           );
           this.animateExploration(
             p5,
             this.traversalInfo.shortestPath,
             [255, 213, 60],
-            [0, 100, 0]
+            [180, 150, 40]
           );
           this.props.getDistance(this.traversalInfo.distance);
           this.animated = true;

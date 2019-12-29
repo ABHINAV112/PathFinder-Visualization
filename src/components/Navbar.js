@@ -102,25 +102,28 @@ export default class CustomNavbar extends Component {
               />
 
               <Dropdown.Menu>
-                {["Breadth First Search", "Depth First Search", "Dijkstra"].map(
-                  pathAlgorithm => {
-                    return (
-                      <Dropdown.Item
-                        key={pathAlgorithm}
-                        onClick={() => {
-                          this.props.getShortPathAlgorithm(
-                            pathAlgorithm.replace(/ /g, "")
-                          );
-                          this.setState({
-                            selectedPathAlgorithm: pathAlgorithm
-                          });
-                        }}
-                      >
-                        {pathAlgorithm}
-                      </Dropdown.Item>
-                    );
-                  }
-                )}
+                {[
+                  "Breadth First Search",
+                  "Depth First Search",
+                  "Dijkstra",
+                  "Astar"
+                ].map(pathAlgorithm => {
+                  return (
+                    <Dropdown.Item
+                      key={pathAlgorithm}
+                      onClick={() => {
+                        this.props.getShortPathAlgorithm(
+                          pathAlgorithm.replace(/ /g, "")
+                        );
+                        this.setState({
+                          selectedPathAlgorithm: pathAlgorithm
+                        });
+                      }}
+                    >
+                      {pathAlgorithm}
+                    </Dropdown.Item>
+                  );
+                })}
               </Dropdown.Menu>
             </Dropdown>
           </Col>

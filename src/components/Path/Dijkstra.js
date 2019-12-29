@@ -36,14 +36,13 @@ export default function dijkstra(maze, start, end) {
     distance: 0
   });
   while (!pQueue.isEmpty()) {
-    console.log(JSON.stringify(pQueue.heap), pQueue.heapSize);
     var currNode = pQueue.dequeue();
-    console.log(JSON.stringify(pQueue.heap));
+
     order.push(currNode.index);
     var currDistance = distances[currNode.index[0]][currNode.index[1]];
     if (currNode.index[0] !== end[0] || currNode.index[1] !== end[1]) {
       var currNeighbours = graphHelper.returnNeighbours(currNode.index);
-      console.log("neighbours", currNeighbours);
+
       for (let i = 0; i <= currNeighbours.length - 1; i++) {
         let currNeighbour = currNeighbours[i];
         let currNeighbourIndex = currNeighbour.neighbour;
@@ -53,7 +52,7 @@ export default function dijkstra(maze, start, end) {
             index: currNeighbourIndex,
             distance: currDistance + currNeighbour.weight
           });
-          //
+
           distances[currNeighbourIndex[0]][currNeighbourIndex[1]] =
             currDistance + currNeighbour.weight;
           parentTracking[currNeighbourIndex[0]][currNeighbourIndex[1]] =

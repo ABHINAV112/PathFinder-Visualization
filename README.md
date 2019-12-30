@@ -1,38 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Path finder visualized
 
-## Available Scripts
+This project visualizes popular path finding algorithms(may not be the shortest path), we have weighted and unweighted algorithms. The project also includes a few algorithms which generate mazes. The projects is built using the react-js framework and a p5js wrapper for reactjs. The project may be found at this [link](https://abhinav112.github.io/PathFinder-Visualization/).
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Objects
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+These are the objects which are placed on the grid.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Start
 
-### `npm test`
+The start indicates the start location to apply our path finding algorithms.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### End
 
-### `npm run build`
+The end indicates the end location to apply our path finding algorithms.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Wall
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The wall represents a node which cannot be traversed by our path finding algorithms.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Weight
 
-### `npm run eject`
+The weight is a node whose connection has a weight of 5, so going to this node and going out of it has a distance of 5 units.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Path Finding algorithms
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Breadth First Search
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Breadth first search is an unweighted graph search algorithm which can be used to calculate the shortest path to a node, here we implement the BFS using a queue data structure.
+
+### Depth First Search
+
+Depth first search is an unweighted graph search algorithm which can be used to calculate a path to a node, here we implement the DFS using a stack data structure.
+
+### Dijkstra
+
+Dijkstra's is a weighted graph search algorithm which can be used to calculate the shortest path to a node, here we implement Dijkstra's using a priority queue made by a heap.
+
+### Astar
+
+Astar is a weighted graph search algorithm which can be used to calculate the shortest path to a node, here we implement Astar using a priority queue made by a heap. The Astar uses a heuristic to reduce computation time, the heuristic used here is [Manhattan Distance](https://xlinux.nist.gov/dads/HTML/manhattanDistance.html).
+
+---
+
+## Maze generation algorithms
+
+### Randomized verticals
+
+Randomized verticals is a maze generation algorithm in which we make a maze consisting of several vertical lines, with holes placed in random locations.
+
+### Randomized horizontals
+
+Randomized horizontals is a maze generation algorithm in which we make a maze consisting of several horizontal lines, with holes placed in random locations.
+
+### Recursive division
+
+Recursive division is a recursive maze generation algorithm in which we keep splitting the grid into sub sections by drawing vertical and horizontal lines, we randomize the location of these lines and also generate random holes. The holes and lines will never coincide.

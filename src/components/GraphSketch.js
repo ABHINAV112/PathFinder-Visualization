@@ -155,6 +155,7 @@ export default class Graph extends Component {
   };
 
   placeMazeWall = (p5, index) => {
+    console.log(this.graph[index[0]]);
     if (this.graph[index[0]][index[1]] === 0) {
       this.graph[index[0]][index[1]] = 2;
       this.colourBox(p5, index, [47, 56, 56]);
@@ -166,7 +167,7 @@ export default class Graph extends Component {
 
   placeMazeWallOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
-    console.log("i,j prev", this.iPrev, this.jPrev);
+    // console.log("i,j prev", this.iPrev, this.jPrev);
     if (
       index[0] < this.mazeHeight &&
       index[0] >= 0 &&
@@ -187,7 +188,7 @@ export default class Graph extends Component {
 
   placeWeightOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
-    console.log("i,j prev", this.iPrev, this.jPrev);
+    // console.log("i,j prev", this.iPrev, this.jPrev);
     if (
       index[0] < this.mazeHeight &&
       index[0] >= 0 &&

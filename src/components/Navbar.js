@@ -64,25 +64,27 @@ export default class CustomNavbar extends Component {
               />
 
               <Dropdown.Menu>
-                {["Randomized Verticals", "Randomized Horizontals"].map(
-                  mazeAlgorithm => {
-                    return (
-                      <Dropdown.Item
-                        key={mazeAlgorithm}
-                        onClick={() => {
-                          this.props.getMazeAlgorithm(
-                            mazeAlgorithm.replace(/ /g, "")
-                          );
-                          this.setState({
-                            selectedMazeAlgorithm: mazeAlgorithm
-                          });
-                        }}
-                      >
-                        {mazeAlgorithm}
-                      </Dropdown.Item>
-                    );
-                  }
-                )}
+                {[
+                  "Randomized Verticals",
+                  "Randomized Horizontals",
+                  "Recursive Division"
+                ].map(mazeAlgorithm => {
+                  return (
+                    <Dropdown.Item
+                      key={mazeAlgorithm}
+                      onClick={() => {
+                        this.props.getMazeAlgorithm(
+                          mazeAlgorithm.replace(/ /g, "")
+                        );
+                        this.setState({
+                          selectedMazeAlgorithm: mazeAlgorithm
+                        });
+                      }}
+                    >
+                      {mazeAlgorithm}
+                    </Dropdown.Item>
+                  );
+                })}
               </Dropdown.Menu>
             </Dropdown>
           </Col>

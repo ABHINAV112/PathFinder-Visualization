@@ -91,9 +91,8 @@ export default function dijkstra(maze, start, end) {
             });
             distances[currNeighbourIndex[0]][currNeighbourIndex[1]] =
               currDistance + currNeighbour.weight;
-            parentTracking[currNeighbourIndex[0]][
-              currNeighbourIndex[1]
-            ] = currNode;
+            parentTracking[currNeighbourIndex[0]][currNeighbourIndex[1]] =
+              currNode.index;
           }
         }
       }
@@ -109,6 +108,7 @@ export default function dijkstra(maze, start, end) {
   var shortestPath = [end];
   while (itr) {
     shortestPath.push(itr);
+    console.log("itr", itr);
     itr = parentTracking[itr[0]][itr[1]];
   }
   console.log("order", order);

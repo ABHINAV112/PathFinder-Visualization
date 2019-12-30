@@ -74,9 +74,8 @@ export default function dijkstra(maze, start, end) {
             });
             distances[currNeighbourIndex[0]][currNeighbourIndex[1]] =
               currDistance + currNeighbour.weight;
-            parentTracking[currNeighbourIndex[0]][
-              currNeighbourIndex[1]
-            ] = currNode;
+            parentTracking[currNeighbourIndex[0]][currNeighbourIndex[1]] =
+              currNode.index;
           }
         }
       }

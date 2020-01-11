@@ -4,6 +4,7 @@ import Sketch from "react-p5";
 import PathAlgorithms from "./Path/Path";
 import MazeAlgorithms from "./Maze/Maze";
 
+// The graph is going to be stored as a 2D array, with the following values having the
 // 0-> free
 // 1-> start
 // 2-> maze wall
@@ -44,6 +45,7 @@ export default class Graph extends Component {
     // p5.frameRate(1);
   };
 
+  // function to initialize the maze and the grid
   initGrid(p5) {
     this.graph = [];
     for (let i = 0; i < this.mazeHeight; i++) {
@@ -72,12 +74,14 @@ export default class Graph extends Component {
     }
   }
 
+  // function to calculate the index on the grid from the x and y coordinate on the screen
   calculateIndex = (X, Y) => {
     let j = parseInt(X / this.mazeWidthUnit);
     let i = parseInt(Y / this.mazeHeightUnit);
     return [i, j];
   };
 
+  // function to colour a box with a given index and colour
   colourBox = (p5, index, fillValue) => {
     let i = index[0],
       j = index[1];
@@ -96,6 +100,7 @@ export default class Graph extends Component {
 
   empty = () => {};
 
+  // function to place the start on click
   placeStartOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
     if (
@@ -125,6 +130,7 @@ export default class Graph extends Component {
     this.place = this.empty;
   };
 
+  // function to place the end on click
   placeEndOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
     if (
@@ -154,6 +160,8 @@ export default class Graph extends Component {
     this.place = this.empty;
   };
 
+  // function to place maze wall
+  // used in the maze generation algorithms
   placeMazeWall = (p5, index) => {
     console.log(this.graph[index[0]]);
     if (this.graph[index[0]][index[1]] === 0) {
@@ -165,6 +173,7 @@ export default class Graph extends Component {
     }
   };
 
+  // functino to place maze wall on click
   placeMazeWallOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
     // console.log("i,j prev", this.iPrev, this.jPrev);
@@ -174,18 +183,13 @@ export default class Graph extends Component {
       index[1] < this.mazeWidth &&
       index[1] >= 0
     ) {
-      if (this.graph[index[0]][index[1]] === 0) {
-        this.graph[index[0]][index[1]] = 2;
-        this.colourBox(p5, index, [47, 56, 56]);
-      } else if (this.graph[index[0]][index[1]] === 2) {
-        this.graph[index[0]][index[1]] = 0;
-        this.colourBox(p5, index, 255);
-      }
+      this.placeMazeWall(p5, index);
     }
 
     this.place = this.empty;
   };
 
+  // function to place a weighted node on click
   placeWeightOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
     // console.log("i,j prev", this.iPrev, this.jPrev);
@@ -207,7 +211,8 @@ export default class Graph extends Component {
     this.place = this.empty;
   };
 
-  animateExploration = (p5, order, colour1, colour2) => {
+  // function to animate the finding of path from start to end nodes
+  animatePathFinding = (p5, order, colour1, colour2) => {
     p5.frameRate(1);
     for (let i = 1; i < order.length - 1; i++) {
       setTimeout(() => {
@@ -221,24 +226,7 @@ export default class Graph extends Component {
     p5.frameRate(10);
   };
 
-  animatePath = (p5, order, colour) => {
-    if (!colour) {
-      colour = [
-        Math.floor(Math.random() * 255 + 0),
-        Math.floor(Math.random() * 255 + 0),
-        Math.floor(Math.random() * 255 + 0)
-      ];
-    }
-
-    p5.frameRate(1);
-    for (let i = 1; i < order.length - 1; i++) {
-      setTimeout(() => {
-        this.colourBox(p5, order[i], colour);
-      }, 0);
-    }
-    p5.frameRate(10);
-  };
-
+  // function to animate the placing of mazes and update the grid array
   animateMazeWalls = (p5, order) => {
     this.clearSketch(p5);
     for (let i = 0; i < order.length; i++) {
@@ -248,6 +236,7 @@ export default class Graph extends Component {
     }
   };
 
+  // function to clear the animation effects
   clearAnimation = p5 => {
     for (let i = 0; i < this.graph.length; i++) {
       for (let j = 0; j < this.graph[0].length; j++) {
@@ -262,6 +251,7 @@ export default class Graph extends Component {
     this.animated = false;
   };
 
+  // function to clear the entire grid to scratch
   clearSketch = p5 => {
     this.initGrid(p5);
     this.startPlaced = false;
@@ -271,19 +261,23 @@ export default class Graph extends Component {
     this.animated = false;
   };
 
+  // p5js inbuilt method to detect screen touches
   touchStarted = p5 => {
     this.place = this.objectDraw[this.props.object];
   };
+  // main draw function
   draw = p5 => {
     this.place(p5);
 
+    // if navbar communicates to clear entire board
     if (this.props.returnClear()) {
-      // console.log("clearing");
       this.clearSketch(p5);
     }
+    // if navbar communicates to clear the animation
     if (this.props.returnClearAnimation()) {
       this.clearAnimation(p5);
     }
+    // if navbar communicates to find the path
     if (this.props.returnFindPath()) {
       if (this.animated) {
         this.clearAnimation(p5);
@@ -296,13 +290,13 @@ export default class Graph extends Component {
           this.endCoords
         );
         if (this.traversalInfo) {
-          this.animateExploration(
+          this.animatePathFinding(
             p5,
             this.traversalInfo.traversalOrder,
             [49, 233, 129],
             [30, 200, 100]
           );
-          this.animateExploration(
+          this.animatePathFinding(
             p5,
             this.traversalInfo.shortestPath,
             [255, 213, 60],
@@ -316,6 +310,7 @@ export default class Graph extends Component {
       }
     }
 
+    // if the navbar communicates to generate a maze
     if (this.props.returnGenerateMaze()) {
       console.log("making maze");
       let mazeOrder = MazeAlgorithms[this.props.mazeAlgorithm](this.graph);
@@ -326,16 +321,15 @@ export default class Graph extends Component {
     }
   };
 
+  // main react render method
   render = () => {
     return (
-      <div>
-        <Sketch
-          setup={this.setup}
-          draw={this.draw}
-          touchStarted={this.touchStarted}
-          className="sketch"
-        />
-      </div>
+      <Sketch
+        setup={this.setup}
+        draw={this.draw}
+        touchStarted={this.touchStarted}
+        className="sketch"
+      />
     );
   };
 }

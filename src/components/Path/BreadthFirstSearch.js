@@ -56,6 +56,7 @@ function BreadthFirstSearch(maze, start, end) {
     itr = parentTracking[itr[0]][itr[1]];
   }
 
+  // returning the exploration order, shortest path accoding to algorithm and distance
   return {
     traversalOrder: order,
     shortestPath: shortestPath,

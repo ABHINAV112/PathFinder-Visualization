@@ -26,12 +26,7 @@ export default function dijkstra(maze, start, end) {
   var order = [];
   var finalDistance = -1;
   distances[start[0]][start[1]] = 0;
-  // store
-  // {
-  //  index:[],
-  //  distance: 0,
-  //  heuristic: 0
-  // }
+
   pQueue.enqueue({
     index: start,
     distance: 0,
@@ -108,10 +103,11 @@ export default function dijkstra(maze, start, end) {
   var shortestPath = [end];
   while (itr) {
     shortestPath.push(itr);
-    console.log("itr", itr);
+
     itr = parentTracking[itr[0]][itr[1]];
   }
-  console.log("order", order);
+
+  // returning the exploration order, shortest path accoding to algorithm and distance
   return {
     traversalOrder: order,
     shortestPath: shortestPath,

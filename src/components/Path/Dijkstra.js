@@ -93,7 +93,8 @@ export default function dijkstra(maze, start, end) {
     shortestPath.push(itr);
     itr = parentTracking[itr[0]][itr[1]];
   }
-  console.log("order", order);
+
+  // returning the exploration order, shortest path accoding to algorithm and distance
   return {
     traversalOrder: order,
     shortestPath: shortestPath,

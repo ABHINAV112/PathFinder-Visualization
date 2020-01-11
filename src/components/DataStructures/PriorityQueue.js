@@ -1,3 +1,4 @@
+// heap implementation of a priority queue with some additional functionality for updating values in the pq
 class PriorityQueue {
   constructor(comparator) {
     this.heap = [];
@@ -29,7 +30,6 @@ class PriorityQueue {
       this.heapSize--;
       this.siftDown(0);
     } else if (this.heapSize === 1) {
-      console.log("test");
       this.heap = [];
       this.heapSize--;
     }
@@ -68,10 +68,8 @@ class PriorityQueue {
   }
 
   heapify() {
-    console.log("test");
     for (let i = this.heapSize - 1; i >= 0; i--) {
       this.siftDown(i);
-      // console.log(this.heap);
     }
   }
 

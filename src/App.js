@@ -47,7 +47,6 @@ export default class App extends React.Component {
     this.setState({ findPath: true });
   };
   generateMaze = () => {
-    console.log("hi");
     this.setState({ generateMaze: true });
   };
   returnClearAnimation = () => {
@@ -70,7 +69,6 @@ export default class App extends React.Component {
     return false;
   };
   returnFindPath = () => {
-    // console.log(this.s)
     if (this.state.findPath) {
       this.setState({
         findPath: false
@@ -81,7 +79,6 @@ export default class App extends React.Component {
   };
   returnGenerateMaze = () => {
     if (this.state.generateMaze) {
-      console.log("hi2");
       this.setState({
         generateMaze: false
       });

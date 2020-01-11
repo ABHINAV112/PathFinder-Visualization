@@ -28,7 +28,6 @@ function BreadthFirstSearch(maze, start, end) {
   distances[start[0]][start[1]] = 0;
   queue.enqueue(start);
   while (!queue.isEmpty()) {
-    // console.log("queue", JSON.stringify(queue.queue));
     var currNode = queue.dequeue();
     var currDistance = distances[currNode[0]][currNode[1]];
     if (currNode[0] !== end[0] || currNode[1] !== end[1]) {

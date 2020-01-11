@@ -163,7 +163,6 @@ export default class Graph extends Component {
   // function to place maze wall
   // used in the maze generation algorithms
   placeMazeWall = (p5, index) => {
-    console.log(this.graph[index[0]]);
     if (this.graph[index[0]][index[1]] === 0) {
       this.graph[index[0]][index[1]] = 2;
       this.colourBox(p5, index, [47, 56, 56]);
@@ -176,7 +175,7 @@ export default class Graph extends Component {
   // functino to place maze wall on click
   placeMazeWallOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
-    // console.log("i,j prev", this.iPrev, this.jPrev);
+
     if (
       index[0] < this.mazeHeight &&
       index[0] >= 0 &&
@@ -192,7 +191,7 @@ export default class Graph extends Component {
   // function to place a weighted node on click
   placeWeightOnClick = p5 => {
     let index = this.calculateIndex(p5.mouseX, p5.mouseY);
-    // console.log("i,j prev", this.iPrev, this.jPrev);
+
     if (
       index[0] < this.mazeHeight &&
       index[0] >= 0 &&
@@ -312,9 +311,7 @@ export default class Graph extends Component {
 
     // if the navbar communicates to generate a maze
     if (this.props.returnGenerateMaze()) {
-      console.log("making maze");
       let mazeOrder = MazeAlgorithms[this.props.mazeAlgorithm](this.graph);
-      console.log("mazeorder", mazeOrder);
       if (mazeOrder) {
         this.animateMazeWalls(p5, mazeOrder);
       }

@@ -4,9 +4,9 @@ class GraphHelper {
     this.graph = graph;
     this.rows = graph.length;
     this.cols = graph[0].length;
-    console.log("cols", this.cols);
   }
 
+  // return neighbours of cell with given index
   returnNeighbours = index => {
     var result = [];
 

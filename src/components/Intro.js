@@ -42,9 +42,6 @@ class IntroCard extends React.Component {
 }
 
 export default class Intro extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   render = () => {
     return (
       <IntroCard

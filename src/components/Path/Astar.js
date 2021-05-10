@@ -1,7 +1,7 @@
 import GraphHelper from "../DataStructures/GraphHelper";
 import PriorityQueue from "../DataStructures/PriorityQueue";
 
-export default function dijkstra(maze, start, end) {
+export default function Astar(maze, start, end) {
   var pQueue = new PriorityQueue(function(x) {
     return x.heuristic;
   });

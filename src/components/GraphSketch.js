@@ -42,7 +42,6 @@ export default class Graph extends Component {
     this.animated = false;
     this.iPrev = 0;
     this.jPrev = 0;
-    // p5.frameRate(1);
   };
 
   // function to initialize the maze and the grid
@@ -116,7 +115,7 @@ export default class Graph extends Component {
           this.startPlaced = true;
           this.startCoords = index;
         } else {
-          // TODO: can make like a popup which says start has already been placed
+          alert("start has already been placed");
         }
       } else if (this.startPlaced) {
         if (this.graph[index[0]][index[1]] === 1) {
@@ -146,7 +145,7 @@ export default class Graph extends Component {
           this.endPlaced = true;
           this.endCoords = index;
         } else {
-          // TODO: can make like a popup which says start has already been placed
+          alert("end has already been placed");
         }
       } else if (this.endPlaced) {
         if (this.graph[index[0]][index[1]] === 4) {
@@ -306,6 +305,7 @@ export default class Graph extends Component {
         }
       } else {
         // TODO: something which says start and end haven't been placed
+        alert("start or end has not been placed");
       }
     }
 

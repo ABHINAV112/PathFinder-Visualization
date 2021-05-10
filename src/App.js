@@ -3,7 +3,6 @@ import Graph from "./components/GraphSketch";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Intro from "./components/Intro";
 
 export default class App extends React.Component {
   constructor(props) {
